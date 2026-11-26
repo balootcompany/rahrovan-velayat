@@ -1,11 +1,18 @@
 # خیریه رهروان ولایت
 
-PWA ready for Android APK via PWABuilder.
+PWA کامل با دستیار هوشمند صوتی
 
-## Live URL
-https://rahrovan-velayat.netlify.app
+## ویژگی‌ها
+- UI مدرن و RTL
+- دستیار هوش مصنوعی با قابلیت گفتگو، ویرایش، ثبت و حذف
+- دیالوگ صوتی (صحبت کن و جواب بشنو)
+- مدیریت خانواده‌ها، مردان، خانم‌ها، کمپ ترک اعتیاد
+- Service Worker و PWA آماده برای APK
 
-## How to get APK
-1. Go to https://www.pwabuilder.com
-2. Enter: https://rahrovan-velayat.netlify.app
+## لینک زنده
+بعد از اتصال به Netlify یا GitHub Pages لینک اینجا قرار می‌گیرد.
+
+## ساخت APK
+1. برو به https://www.pwabuilder.com
+2. لینک سایت را وارد کن
 3. Package for Android
