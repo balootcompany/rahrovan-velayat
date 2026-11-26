@@ -2,11 +2,139 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <!-- Full content is in the zip; this is a placeholder note -->
-  <title>رهروان ولایت</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f766e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="رهروان ولایت" />
+  <meta name="description" content="سامانه مدیریت خیریه رهروان ولایت با دستیار هوش مصنوعی صوتی" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>خیریه رهروان ولایت | مسجد چهارده معصوم (ع)</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4',
+              400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e',
+              800: '#115e59', 900: '#134e4a'
+            }
+          },
+          fontFamily: { sans: ['Vazirmatn', 'Tahoma', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body { font-family: 'Vazirmatn', Tahoma, system-ui, sans-serif; overscroll-behavior: none; -webkit-font-smoothing: antialiased; background: #f8fafc; color: #1e293b; }
+    .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+    .glass { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); }
+    .chat-bubble { animation: fadeInUp 0.25s ease-out; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .nav-item.active { color: #0f766e; }
+    .nav-item.active svg { stroke-width: 2.5; }
+    .card-hover { transition: transform 0.15s ease; }
+    .card-hover:active { transform: scale(0.97); }
+    ::-webkit-scrollbar { width: 0; height: 0; }
+    .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    :focus-visible { outline: 3px solid #14b8a6; outline-offset: 2px; border-radius: 8px; }
+  </style>
 </head>
-<body>
-  <p>Please upload the full zip to Netlify Drop for complete deployment.</p>
-  <p>See: https://github.com/balootcompany/rahrovan-velayat</p>
+<body class="bg-slate-50 text-slate-800 h-screen overflow-hidden flex flex-col">
+  <a href="#mainContent" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:right-2 focus:bg-primary-700 focus:text-white focus:px-3 focus:py-2 focus:rounded-lg focus:z-50">رفتن به محتوا</a>
+  <header class="bg-gradient-to-l from-primary-700 to-primary-600 text-white px-4 pt-4 pb-3 shadow-lg z-20" role="banner">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight">رهروان ولایت</h1>
+          <p class="text-xs text-primary-100">مسجد چهارده معصوم (ع)</p>
+        </div>
+      </div>
+      <button onclick="toggleAI()" class="relative p-2 rounded-full bg-white/15 hover:bg-white/25 transition" aria-label="دستیار هوشمند">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+        <span class="absolute top-1 right-1 w-2 h-2 bg-amber-400 rounded-full"></span>
+      </button>
+    </div>
+  </header>
+  <main id="mainContent" class="flex-1 overflow-y-auto hide-scroll pb-24" role="main" aria-live="polite"></main>
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 safe-bottom z-30 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]" role="navigation" aria-label="منوی اصلی">
+    <div class="flex justify-around items-center h-16 px-1">
+      <button onclick="navigate('dashboard')" class="nav-item active flex flex-col items-center justify-center w-16 gap-0.5 text-xs font-medium text-slate-500" aria-label="داشبورد" aria-current="page">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+        <span>داشبورد</span>
+      </button>
+      <button onclick="navigate('beneficiaries')" class="nav-item flex flex-col items-center justify-center w-16 gap-0.5 text-xs font-medium text-slate-500" aria-label="مددجویان">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+        <span>مددجویان</span>
+      </button>
+      <button onclick="navigate('ai')" class="nav-item flex flex-col items-center justify-center w-16 gap-0.5 text-xs font-medium text-slate-500 relative -mt-5" aria-label="دستیار هوشمند">
+        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 text-white flex items-center justify-center shadow-lg shadow-primary-500/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+        </div>
+      </button>
+      <button onclick="navigate('donations')" class="nav-item flex flex-col items-center justify-center w-16 gap-0.5 text-xs font-medium text-slate-500" aria-label="کمک‌ها">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>کمک‌ها</span>
+      </button>
+      <button onclick="navigate('more')" class="nav-item flex flex-col items-center justify-center w-16 gap-0.5 text-xs font-medium text-slate-500" aria-label="بیشتر">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        <span>بیشتر</span>
+      </button>
+    </div>
+  </nav>
+  <div id="aiPanel" class="fixed inset-0 z-50 hidden flex flex-col bg-slate-50" role="dialog" aria-modal="true" aria-labelledby="aiTitle" aria-hidden="true">
+    <div class="bg-gradient-to-l from-primary-700 to-primary-600 text-white px-4 py-3 flex items-center justify-between shadow-lg">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+        </div>
+        <div>
+          <h2 id="aiTitle" class="font-bold">دستیار هوشمند رهروان ولایت</h2>
+          <p class="text-xs text-primary-100">گفتگوی صوتی · ویرایش · ثبت</p>
+        </div>
+      </div>
+      <button onclick="toggleAI()" class="p-2 rounded-full hover:bg-white/20" aria-label="بستن">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+    </div>
+    <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4" role="log" aria-live="polite"></div>
+    <div class="p-3 bg-white border-t border-slate-200 safe-bottom">
+      <div class="flex gap-2">
+        <button onclick="startVoice()" class="w-12 h-12 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center active:scale-95 transition border border-slate-200" aria-label="صحبت کردن" title="صحبت کن">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+        </button>
+        <input id="chatInput" type="text" placeholder="صحبت کن یا بنویس..." class="flex-1 bg-slate-100 rounded-2xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary-500" aria-label="پیام" onkeydown="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()" class="w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center shadow-md active:scale-95 transition" aria-label="ارسال">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+        </button>
+      </div>
+      <div class="flex gap-2 mt-2 overflow-x-auto hide-scroll pb-1">
+        <button onclick="quickCmd('آمار کلی')" class="shrink-0 text-xs bg-primary-50 text-primary-700 px-3 py-1.5 rounded-full border border-primary-200">آمار کلی</button>
+        <button onclick="quickCmd('خانواده‌های نیازمند')" class="shrink-0 text-xs bg-primary-50 text-primary-700 px-3 py-1.5 rounded-full border border-primary-200">خانواده‌های نیازمند</button>
+        <button onclick="quickCmd('یک خانواده جدید ثبت کن')" class="shrink-0 text-xs bg-primary-50 text-primary-700 px-3 py-1.5 rounded-full border border-primary-200">ثبت خانواده</button>
+        <button onclick="quickCmd('راهنما')" class="shrink-0 text-xs bg-primary-50 text-primary-700 px-3 py-1.5 rounded-full border border-primary-200">راهنما</button>
+      </div>
+    </div>
+  </div>
+  <script src="app.js" defer></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>
